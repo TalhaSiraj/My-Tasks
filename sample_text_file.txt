@@ -1,0 +1,4821 @@
+Python Crash Course. Copyright © 2016 by Eric Matthes.
+All rights reserved. No part of this work may be reproduced or transmitted in any form or by any means,
+electronic or mechanical, including photocopying, recording, or by any information storage or retrieval
+system, without the prior written permission of the copyright owner and the publisher.
+First printing
+19 18 17 16 15   1 2 3 4 5 6 7 8 9
+ISBN-10: 1-59327-603-6
+ISBN-13: 978-1-59327-603-4
+Publisher: William Pollock
+Production Editor: Riley Hoffman
+Cover Illustration: Josh Ellingson
+Interior Design: Octopod Studios
+Developmental Editors: William Pollock, Liz Chadwick, and Leslie Shen
+Technical Reviewer: Kenneth Love
+Copyeditor: Anne Marie Walker
+Compositor: Riley Hoffman
+Proofreader: James Fraleigh
+For information on distribution, translations, or bulk sales, please contact No Starch Press, Inc. directly:
+No Starch Press, Inc.
+245 8th Street, San Francisco, CA 94103
+phone: 415.863.9900; info@nostarch.com
+www.nostarch.com
+Library of Congress Cataloging-in-Publication Data
+Matthes, Eric, 1972-
+Python crash course : a hands-on, project-based introduction to programming / by Eric Matthes.
+pages cm
+Includes index.
+Summary: "A project-based introduction to programming in Python, with exercises. Covers general
+programming concepts, Python fundamentals, and problem solving. Includes three projects - how to
+create a simple video game, use data visualization techniques to make graphs and charts, and build
+an interactive web application"-- Provided by publisher.
+ISBN 978-1-59327-603-4 -- ISBN 1-59327-603-6
+1. Python (Computer program language) I. Title.
+QA76.73.P98M38 2015
+005.13'3--dc23
+2015018135
+No Starch Press and the No Starch Press logo are registered trademarks of No Starch Press, Inc. Other
+product and company names mentioned herein may be the trademarks of their respective owners. Rather
+than use a trademark symbol with every occurrence of a trademarked name, we are using the names only
+in an editorial fashion and to the benefit of the trademark owner, with no intention of infringement of the
+trademark.
+The information in this book is distributed on an “As Is” basis, without warranty. While every precaution
+has been taken in the preparation of this work, neither the author nor No Starch Press, Inc. shall have any
+liability to any person or entity with respect to any loss or damage caused or alleged to be caused directly or
+indirectly by the information contained in it.
+WOW! eBook
+www.wowebook.orgAbout the Author
+Eric Matthes is a high school science and math teacher living in Alaska,
+where he teaches an introductory Python course. He has been writing
+programs since he was five years old. Eric currently focuses on writing soft-
+ware that addresses inefficiencies in education and brings the benefits of
+open source software to the field of education. In his spare time he enjoys
+climbing mountains and spending time with his family.
+About the Technical Reviewer
+Kenneth Love has been a Python programmer and teacher for many years.
+He has given talks and tutorials at conferences, done professional train-
+ings, been a Python and Django freelancer, and now teaches for an online
+education company. Kenneth is also the co-creator of the django-braces
+package, which provides several handy mixins for Django’s class-based
+views. You can keep up with him on Twitter at @kennethlove.
+WOW! eBook
+www.wowebook.orgWOW! eBook
+www.wowebook.orgFor my father, who always made time to
+answer my questions about programming,
+and for Ever, who is just beginning to ask me
+his questions
+WOW! eBook
+www.wowebook.orgWOW! eBook
+www.wowebook.orgBrief Contents
+Acknowledgments .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . xxvii
+Introduction  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . xxix
+Part I: Basics  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1
+Chapter 1: Getting Started .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 3
+Chapter 2: Variables and Simple Data Types .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 19
+Chapter 3: Introducing Lists  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 37
+Chapter 4: Working with Lists . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+Chapter 5: if Statements .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 75
+Chapter 6: Dictionaries .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 95
+Chapter 7: User Input and while Loops  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 117
+Chapter 8: Functions .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 133
+Chapter 9: Classes .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 161
+Chapter 10: Files and Exceptions .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 189
+Chapter 11: Testing Your Code  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 215
+Part II: Projects . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 231
+Project 1: Alien Invasion
+Chapter 12: A Ship That Fires Bullets .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 235
+Chapter 13: Aliens! .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 265
+Chapter 14: Scoring .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 291
+WOW! eBook
+www.wowebook.orgProject 2: Data Visualization
+Chapter 15: Generating Data . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 321
+Chapter 16: Downloading Data .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 349
+Chapter 17: Working with APIs  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 377
+Project 3: Web Applications
+Chapter 18: Getting Started with Django .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 397
+Chapter 19: User Accounts  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 427
+Chapter 20: Styling and Deploying an App .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 455
+Afterword .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 483
+Appendix A: Installing Python .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 485
+Appendix B: Text Editors  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 491
+Appendix C: Getting Help .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 499
+Appendix D: Using Git for Version Control .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 505
+Index .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 515
+x     Brief Contents
+WOW! eBook
+www.wowebook.orgConte nt s in De ta il
+Acknowledgments	 xxvii
+Introduction	 xxix
+Who Is This Book For? .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . xxx
+What Can You Expect to Learn? .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . xxx
+Why Python? .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . xxxi
+Part I: Basics	 1
+1
+Getting Started	 3
+Setting Up Your Programming Environment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Python 2 and Python 3 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Running Snippets of Python Code .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Hello World! .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Python on Different Operating Systems  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Python on Linux .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Python on OS X .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Python on Windows .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Troubleshooting Installation Issues .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Running Python Programs from a Terminal .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+On Linux and OS X  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+On Windows  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 1-1: python.org . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 1-2: Hello World Typos  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 1-3: Infinite Skills . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Summary .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . . 3
+ . 4
+ . 4
+ . 4
+ . 5
+ . 5
+ . 8
+10
+15
+16
+16
+16
+17
+17
+17
+17
+2
+Variables and Simple Data Types	 19
+What Really Happens When You Run hello_world.py .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Variables .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Naming and Using Variables  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Avoiding Name Errors When Using Variables .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 2-1: Simple Message . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 2-2: Simple Messages  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Strings .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Changing Case in a String with Methods  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Combining or Concatenating Strings  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Adding Whitespace to Strings with Tabs or Newlines .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Stripping Whitespace .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Avoiding Syntax Errors with Strings  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Printing in Python 2  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 2-3: Personal Message . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 2-4: Name Cases  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 2-5: Famous Quote  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+WOW! eBook
+www.wowebook.org
+19
+20
+21
+21
+23
+23
+23
+24
+25
+26
+26
+28
+29
+29
+29
+29Exercise 2-6: Famous Quote 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 2-7: Stripping Names . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Numbers .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Integers .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Floats .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Avoiding Type Errors with the str() Function .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Integers in Python 2 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 2-8: Number Eight . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 2-9: Favorite Number . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Comments  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+How Do You Write Comments? .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+What Kind of Comments Should You Write? .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 2-10: Adding Comments  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+The Zen of Python .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 2-11: Zen of Python . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Summary .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+3
+Introducing Lists	
+37
+What Is a List?  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Accessing Elements in a List .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Index Positions Start at 0, Not 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Using Individual Values from a List .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 3-1: Names  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 3-2: Greetings . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 3-3: Your Own List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Changing, Adding, and Removing Elements .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Modifying Elements in a List  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Adding Elements to a List  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Removing Elements from a List .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 3-4: Guest List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 3-5: Changing Guest List  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 3-6: More Guests  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 3-7: Shrinking Guest List . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Organizing a List  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Sorting a List Permanently with the sort() Method  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Sorting a List Temporarily with the sorted() Function  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Printing a List in Reverse Order  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Finding the Length of a List  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 3-8: Seeing the World . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 3-9: Dinner Guests . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 3-10: Every Function  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Avoiding Index Errors When Working with Lists .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 3-11: Intentional Error  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Summary .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+4
+Working with Lists	
+37
+38
+39
+39
+40
+40
+40
+40
+40
+41
+42
+46
+46
+46
+47
+47
+47
+48
+49
+49
+50
+50
+50
+50
+52
+52
+53
+Looping Through an Entire List  .  .  .  .  .  .  .  .  .  .  .  .
+A Closer Look at Looping  .  .  .  .  .  .  .  .  .
+Doing More Work Within a for Loop .
+Doing Something After a for Loop  .  .  .
+xii     Contents in Detail
+29
+29
+30
+30
+30
+31
+32
+33
+33
+33
+33
+33
+34
+34
+36
+36
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+WOW! eBook
+www.wowebook.org
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+53
+54
+55
+56Avoiding Indentation Errors  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Forgetting to Indent  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Forgetting to Indent Additional Lines .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Indenting Unnecessarily  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Indenting Unnecessarily After the Loop .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Forgetting the Colon .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 4-1: Pizzas . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 4-2: Animals . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Making Numerical Lists .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Using the range() Function .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Using range() to Make a List of Numbers  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Simple Statistics with a List of Numbers .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+List Comprehensions .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 4-3: Counting to Twenty . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 4-4: One Million . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 4-5: Summing a Million  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 4-6: Odd Numbers  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 4-7: Threes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 4-8: Cubes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 4-9: Cube Comprehension . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Working with Part of a List .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Slicing a List  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Looping Through a Slice .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Copying a List .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 4-10: Slices  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 4-11: My Pizzas, Your Pizzas  . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 4-12: More Loops . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Tuples .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Defining a Tuple  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Looping Through All Values in a Tuple  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Writing over a Tuple  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 4-13: Buffet . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Styling Your Code .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+The Style Guide .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Indentation  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Line Length  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Blank Lines  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Other Style Guidelines .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 4-14: PEP 8  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 4-15: Code Review . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Summary .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+5
+if Statements	
+57
+57
+58
+59
+59
+60
+60
+60
+61
+61
+62
+63
+63
+64
+64
+64
+64
+64
+64
+64
+65
+65
+66
+67
+69
+69
+69
+69
+69
+70
+71
+71
+72
+72
+72
+73
+73
+73
+74
+74
+74
+75
+A Simple Example .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Conditional Tests .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Checking for Equality .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Ignoring Case When Checking for Equality .
+Checking for Inequality .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Numerical Comparisons .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Checking Multiple Conditions  .  .  .  .  .  .  .  .  .  .
+Checking Whether a Value Is in a List .  .  .  .  .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+WOW! eBook
+www.wowebook.org
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+76
+76
+76
+77
+78
+78
+79
+80
+Contents in Detail     xiiiChecking Whether a Value Is Not in a List  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Boolean Expressions .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 5-1: Conditional Tests . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 5-2: More Conditional Tests  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+if Statements .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Simple if Statements .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+if-else Statements .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+The if-elif-else Chain .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Using Multiple elif Blocks  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Omitting the else Block .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Testing Multiple Conditions .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 5-3: Alien Colors #1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 5-4: Alien Colors #2  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 5-5: Alien Colors #3  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 5-6: Stages of Life . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 5-7: Favorite Fruit  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Using if Statements with Lists .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Checking for Special Items  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Checking That a List Is Not Empty . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Using Multiple Lists .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 5-8: Hello Admin . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 5-9: No Users . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 5-10: Checking Usernames . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 5-11: Ordinal Numbers  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Styling Your if Statements .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 5-12: Styling if statements . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 5-13: Your Ideas . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Summary .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+81
+81
+82
+82
+82
+82
+83
+84
+86
+86
+87
+88
+88
+89
+89
+89
+89
+90
+91
+92
+93
+93
+93
+93
+94
+94
+94
+94
+6
+Dictionaries	95
+A Simple Dictionary  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Working with Dictionaries .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Accessing Values in a Dictionary .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Adding New Key-Value Pairs .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Starting with an Empty Dictionary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Modifying Values in a Dictionary  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Removing Key-Value Pairs .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+A Dictionary of Similar Objects .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 6-1: Person . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 6-2: Favorite Numbers . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 6-3: Glossary  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Looping Through a Dictionary .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Looping Through All Key-Value Pairs . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Looping Through All the Keys in a Dictionary .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Looping Through a Dictionary’s Keys in Order .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Looping Through All Values in a Dictionary .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 6-4: Glossary 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 6-5: Rivers  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 6-6: Polling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Nesting .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+A List of Dictionaries .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+A List in a Dictionary  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+xiv     Contents in Detail
+WOW! eBook
+www.wowebook.org
+ . 96
+ . 96
+ . 97
+ . 97
+. 98
+ . 99
+100
+100
+102
+102
+102
+102
+103
+104
+106
+107
+108
+108
+108
+109
+109
+111A Dictionary in a Dictionary  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 113
+Exercise 6-7: People . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 114
+Exercise 6-8: Pets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 115
+Exercise 6-9: Favorite Places . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 115
+Exercise 6-10: Favorite Numbers . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 115
+Exercise 6-11: Cities . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 115
+Exercise 6-12: Extensions  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 115
+Summary .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 115
+7
+User Input and while Loops	
+117
+How the input() Function Works  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Writing Clear Prompts  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Using int() to Accept Numerical Input .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+The Modulo Operator .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Accepting Input in Python 2.7 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 7-1: Rental Car . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 7-2: Restaurant Seating  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 7-3: Multiples of Ten . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Introducing while Loops .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+The while Loop in Action .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Letting the User Choose When to Quit  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Using a Flag .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Using break to Exit a Loop  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Using continue in a Loop .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Avoiding Infinite Loops .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 7-4: Pizza Toppings . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 7-5: Movie Tickets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 7-6: Three Exits . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 7-7: Infinity . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Using a while Loop with Lists and Dictionaries  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Moving Items from One List to Another .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Removing All Instances of Specific Values from a List  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Filling a Dictionary with User Input .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 7-8: Deli . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 7-9: No Pastrami . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 7-10: Dream Vacation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Summary .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+118
+118
+119
+120
+121
+121
+121
+121
+122
+122
+122
+124
+125
+126
+126
+127
+127
+128
+128
+128
+128
+129
+130
+131
+131
+131
+131
+8
+Functions	133
+Defining a Function .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Passing Information to a Function .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Arguments and Parameters .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 8-1: Message . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 8-2: Favorite Book . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Passing Arguments  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Positional Arguments  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Keyword Arguments .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Default Values .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+WOW! eBook
+www.wowebook.org
+134
+134
+135
+135
+135
+135
+136
+137
+138
+Contents in Detail     xvEquivalent Function Calls . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Avoiding Argument Errors .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 8-3: T-Shirt  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 8-4: Large Shirts  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 8-5: Cities . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Return Values .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Returning a Simple Value  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Making an Argument Optional  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Returning a Dictionary  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Using a Function with a while Loop  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 8-6: City Names . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 8-7: Album . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 8-8: User Albums . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Passing a List  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Modifying a List in a Function  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Preventing a Function from Modifying a List .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 8-9: Magicians . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 8-10: Great Magicians  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 8-11: Unchanged Magicians . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Passing an Arbitrary Number of Arguments .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Mixing Positional and Arbitrary Arguments .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Using Arbitrary Keyword Arguments .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 8-12: Sandwiches . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 8-13: User Profile  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 8-14: Cars . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Storing Your Functions in Modules .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Importing an Entire Module .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Importing Specific Functions  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Using as to Give a Function an Alias  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Using as to Give a Module an Alias .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Importing All Functions in a Module .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Styling Functions .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 8-15: Printing Models . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 8-16: Imports  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 8-17: Styling Functions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Summary .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+139
+140
+141
+141
+141
+141
+142
+142
+144
+145
+146
+146
+146
+147
+147
+149
+150
+150
+150
+151
+152
+152
+154
+154
+154
+154
+154
+156
+156
+157
+157
+158
+159
+159
+159
+159
+9
+Classes	161
+Creating and Using a Class .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Creating the Dog Class .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Making an Instance from a Class .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 9-1: Restaurant  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 9-2: Three Restaurants  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 9-3: Users . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Working with Classes and Instances .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+The Car Class .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Setting a Default Value for an Attribute .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Modifying Attribute Values  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 9-4: Number Served  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 9-5: Login Attempts  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+xvi     Contents in Detail
+WOW! eBook
+www.wowebook.org
+162
+162
+164
+166
+166
+166
+167
+167
+168
+168
+171
+171Inheritance .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+The __init__() Method for a Child Class .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Inheritance in Python 2.7  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Defining Attributes and Methods for the Child Class .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Overriding Methods from the Parent Class  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Instances as Attributes .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Modeling Real-World Objects .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 9-6: Ice Cream Stand . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 9-7: Admin . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 9-8: Privileges . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 9-9: Battery Upgrade . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Importing Classes .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Importing a Single Class .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Storing Multiple Classes in a Module .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Importing Multiple Classes from a Module .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Importing an Entire Module .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Importing All Classes from a Module  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Importing a Module into a Module .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Finding Your Own Workflow .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 9-10: Imported Restaurant  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 9-11: Imported Admin  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 9-12: Multiple Modules  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+The Python Standard Library .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 9-13: OrderedDict Rewrite . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 9-14: Dice  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 9-15: Python Module of the Week . . . . . . . . . . . . . . . . . . . . . . . . .
+Styling Classes .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Summary .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+10
+Files and Exceptions	
+172
+172
+173
+174
+175
+175
+177
+178
+178
+178
+178
+179
+179
+180
+181
+182
+182
+183
+184
+184
+184
+184
+184
+186
+186
+186
+186
+187
+189
+Reading from a File .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Reading an Entire File .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+File Paths  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Reading Line by Line  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Making a List of Lines from a File .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Working with a File’s Contents  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Large Files: One Million Digits .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Is Your Birthday Contained in Pi? .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 10-1: Learning Python  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 10-2: Learning C . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Writing to a File .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Writing to an Empty File .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Writing Multiple Lines .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Appending to a File .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 10-3: Guest  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 10-4: Guest Book  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 10-5: Programming Poll . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exceptions .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Handling the ZeroDivisionError Exception .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Using try-except Blocks .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Using Exceptions to Prevent Crashes .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+WOW! eBook
+www.wowebook.org
+190
+190
+191
+193
+194
+194
+195
+196
+197
+197
+197
+197
+198
+199
+199
+199
+199
+200
+200
+200
+201
+Contents in Detail     xviiThe else Block .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Handling the FileNotFoundError Exception  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Analyzing Text .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Working with Multiple Files .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Failing Silently .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Deciding Which Errors to Report .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 10-6: Addition . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 10-7: Addition Calculator . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 10-8: Cats and Dogs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 10-9: Silent Cats and Dogs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 10-10: Common Words . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Storing Data .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Using json.dump() and json.load() .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Saving and Reading User-Generated Data  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Refactoring .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 10-11: Favorite Number . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 10-12: Favorite Number Remembered . . . . . . . . . . . . . . . . . . . . . .
+Exercise 10-13: Verify User . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Summary .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+11
+Testing Your Code	
+202
+203
+204
+205
+206
+207
+207
+208
+208
+208
+208
+208
+209
+210
+212
+214
+214
+214
+214
+215
+Testing a Function .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Unit Tests and Test Cases  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+A Passing Test .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+A Failing Test . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Responding to a Failed Test .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Adding New Tests .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 11-1: City, Country  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 11-2: Population . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Testing a Class .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+A Variety of Assert Methods  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+A Class to Test .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Testing the AnonymousSurvey Class .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+The setUp() Method  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 11-3: Employee . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Summary .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Part II: Projects	
+216
+217
+217
+218
+219
+221
+222
+222
+222
+222
+223
+225
+227
+228
+228
+231
+Project 1: Alien Invasion
+12
+A Ship that Fires Bullets	
+235
+Planning Your Project . . . . . . . . . . . . . . . . .
+Installing Pygame  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Installing Python Packages with pip  .
+Installing Pygame on Linux  .  .  .  .  .  .  .
+xviii     Contents in Detail
+.
+ .
+ .
+ .
+.
+ .
+ .
+ .
+.
+ .
+ .
+ .
+.
+ .
+ .
+ .
+.
+ .
+ .
+ .
+.
+ .
+ .
+ .
+.
+ .
+ .
+ .
+.
+ .
+ .
+ .
+.
+ .
+ .
+ .
+.
+ .
+ .
+ .
+.
+ .
+ .
+ .
+.
+ .
+ .
+ .
+.
+ .
+ .
+ .
+.
+ .
+ .
+ .
+WOW! eBook
+www.wowebook.org
+.
+ .
+ .
+ .
+.
+ .
+ .
+ .
+.
+ .
+ .
+ .
+.
+ .
+ .
+ .
+.
+ .
+ .
+ .
+.
+ .
+ .
+ .
+.
+ .
+ .
+ .
+.
+ .
+ .
+ .
+.
+ .
+ .
+ .
+.
+ .
+ .
+ .
+.
+ .
+ .
+ .
+.
+ .
+ .
+ .
+.
+ .
+ .
+ .
+.
+ .
+ .
+ .
+.
+ .
+ .
+ .
+236
+236
+237
+238Installing Pygame on OS X  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Installing Pygame on Windows  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Starting the Game Project  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Creating a Pygame Window and Responding to User Input  .  .  .  .  .  .  .  .  .  .  .  .  .
+Setting the Background Color  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Creating a Settings Class  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Adding the Ship Image  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Creating the Ship Class  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Drawing the Ship to the Screen .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Refactoring: the game_functions Module  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+The check_events() Function .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+The update_screen() Function .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 12-1: Blue Sky  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 12-2: Game Character . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Piloting the Ship .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Responding to a Keypress .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Allowing Continuous Movement .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Moving Both Left and Right .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Adjusting the Ship’s Speed .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Limiting the Ship’s Range  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Refactoring check_events()  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+A Quick Recap .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+alien_invasion.py .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+settings.py .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+game_functions.py .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+ship.py .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 12-3: Rocket . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 12-4: Keys . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Shooting Bullets  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Adding the Bullet Settings .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Creating the Bullet Class .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Storing Bullets in a Group .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Firing Bullets  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Deleting Old Bullets  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Limiting the Number of Bullets .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Creating the update_bullets() Function . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Creating the fire_bullet() Function .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 12-5: Sideways Shooter . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Summary .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+239
+240
+240
+241
+242
+243
+244
+245
+246
+247
+247
+248
+249
+249
+249
+249
+250
+252
+253
+255
+255
+256
+256
+256
+256
+257
+257
+257
+257
+257
+258
+259
+260
+261
+262
+263
+264
+264
+264
+13
+Aliens!	265
+Reviewing Your Project  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Creating the First Alien  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Creating the Alien Class .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Creating an Instance of the Alien .  .  .  .  .  .  .  .
+Making the Alien Appear Onscreen .  .  .  .  .  .
+Building the Alien Fleet  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Determining How Many Aliens Fit in a Row .
+Creating Rows of Aliens .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Creating the Fleet .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+WOW! eBook
+www.wowebook.org
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+266
+266
+267
+268
+268
+269
+269
+270
+271
+Contents in Detail     xixRefactoring create_fleet() .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Adding Rows .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 13-1: Stars . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 13-2: Better Stars . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Making the Fleet Move  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Moving the Aliens Right  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Creating Settings for Fleet Direction .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Checking to See Whether an Alien Has Hit the Edge .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Dropping the Fleet and Changing Direction .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 13-3: Raindrops  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 13-4: Steady Rain . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Shooting Aliens .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Detecting Bullet Collisions .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Making Larger Bullets for Testing .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Repopulating the Fleet  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Speeding Up the Bullets  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Refactoring update_bullets() .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 13-5: Catch  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Ending the Game  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Detecting Alien-Ship Collisions .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Responding to Alien-Ship Collisions .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Aliens that Reach the Bottom of the Screen  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Game Over! .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Identifying When Parts of the Game Should Run .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 13-6: Game Over . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Summary .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+273
+273
+276
+276
+276
+276
+277
+278
+278
+279
+279
+280
+280
+281
+282
+283
+283
+284
+284
+284
+285
+288
+288
+289
+290
+290
+14
+Scoring	291
+Adding the Play Button  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Creating a Button Class  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Drawing the Button to the Screen .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Starting the Game  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Resetting the Game  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Deactivating the Play Button  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Hiding the Mouse Cursor  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 14-1: Press P to Play  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 14-2: Target Practice  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Leveling Up  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Modifying the Speed Settings  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Resetting the Speed  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 14-3: Challenging Target Practice . . . . . . . . . . . . . . . . . . . . . . . . .
+Scoring .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Displaying the Score . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Making a Scoreboard  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Updating the Score as Aliens Are Shot Down  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Making Sure to Score All Hits  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Increasing Point Values .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Rounding the Score  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+High Scores . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+xx     Contents in Detail
+WOW! eBook
+www.wowebook.org
+292
+292
+294
+295
+296
+297
+298
+298
+298
+299
+299
+300
+301
+301
+301
+303
+304
+305
+306
+307
+308Displaying the Level .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Displaying the Number of Ships .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 14-4: All-Time High Score . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 14-5: Refactoring  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 14-6: Expanding Alien Invasion . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Summary .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+310
+313
+317
+317
+317
+317
+Project 2: Data Visualization
+15
+Generating Data	
+321
+Installing matplotlib .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+On Linux .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+On OS X .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+On Windows  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Testing matplotlib .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+The matplotlib Gallery  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Plotting a Simple Line Graph  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Changing the Label Type and Graph Thickness .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Correcting the Plot .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Plotting and Styling Individual Points with scatter()  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Plotting a Series of Points with scatter() .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Calculating Data Automatically .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Removing Outlines from Data Points .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Defining Custom Colors  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Using a Colormap .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Saving Your Plots Automatically .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 15-1: Cubes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 15-2: Colored Cubes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Random Walks .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Creating the RandomWalk() Class .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Choosing Directions .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Plotting the Random Walk .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Generating Multiple Random Walks .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Styling the Walk  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Coloring the Points .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Plotting the Starting and Ending Points  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Cleaning Up the Axes .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Adding Plot Points  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Altering the Size to Fill the Screen  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 15-3: Molecular Motion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 15-4: Modified Random Walks . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 15-5: Refactoring  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Rolling Dice with Pygal  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Installing Pygal  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+The Pygal Gallery  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Creating the Die Class  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Rolling the Die .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Analyzing the Results .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+WOW! eBook
+www.wowebook.org
+322
+322
+322
+323
+323
+323
+324
+324
+326
+326
+328
+328
+329
+330
+330
+331
+331
+331
+331
+332
+332
+333
+334
+335
+335
+336
+337
+337
+338
+339
+339
+339
+339
+340
+340
+340
+341
+341
+Contents in Detail     xxiMaking a Histogram . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Rolling Two Dice  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Rolling Dice of Different Sizes  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 15-6: Automatic Labels . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 15-7: Two D8s  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 15-8: Three Dice . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 15-9: Multiplication . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 15-10: Practicing with Both Libraries . . . . . . . . . . . . . . . . . . . . . . .
+Summary .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+16
+Downloading Data	
+349
+The CSV File Format  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Parsing the CSV File Headers  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Printing the Headers and Their Positions .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Extracting and Reading Data .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Plotting Data in a Temperature Chart  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+The datetime Module  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Plotting Dates  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Plotting a Longer Timeframe  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Plotting a Second Data Series  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Shading an Area in the Chart .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Error-Checking .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 16-1: San Francisco . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 16-2: Sitka-Death Valley Comparison . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 16-3: Rainfall  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 16-4: Explore . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Mapping Global Data Sets: JSON Format .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Downloading World Population Data .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Extracting Relevant Data .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Converting Strings into Numerical Values .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Obtaining Two-Digit Country Codes .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Building a World Map .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Plotting Numerical Data on a World Map .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Plotting a Complete Population Map  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Grouping Countries by Population .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Styling World Maps in Pygal .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Lightening the Color Theme .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 16-5: All Countries . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 16-6: Gross Domestic Product . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 16-7: Choose Your Own Data . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 16-8: Testing the country_codes Module . . . . . . . . . . . . . . . . . . . . .
+Summary .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+17
+Working with APIs	
+350
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+362
+362
+362
+362
+362
+362
+363
+364
+365
+367
+368
+369
+371
+372
+374
+375
+375
+375
+375
+375
+377
+Using a Web API  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Git and GitHub .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Requesting Data Using an API Call
+Installing Requests  .  .  .  .  .  .  .  .  .  .  .  .
+xxii     Contents in Detail
+342
+343
+345
+346
+346
+346
+346
+346
+347
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+WOW! eBook
+www.wowebook.org
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+378
+378
+378
+379Processing an API Response  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Working with the Response Dictionary .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Summarizing the Top Repositories  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Monitoring API Rate Limits .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Visualizing Repositories Using Pygal .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Refining Pygal Charts .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Adding Custom Tooltips  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Plotting the Data  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Adding Clickable Links to Our Graph .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+The Hacker News API .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 17-1: Other Languages  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 17-2: Active Discussions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 17-3: Testing python_repos.py . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Summary .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+379
+380
+382
+383
+384
+386
+387
+388
+390
+390
+393
+393
+393
+393
+Project 3: Web Applications
+18
+Getting Started with Django	
+397
+Setting Up a Project .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Writing a Spec  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Creating a Virtual Environment  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Installing virtualenv .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Activating the Virtual Environment  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Installing Django .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Creating a Project in Django .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Creating the Database .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Viewing the Project  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 18-1: New Projects . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Starting an App  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Defining Models  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Activating Models  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+The Django Admin Site .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Defining the Entry Model .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Migrating the Entry Model .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Registering Entry with the Admin Site .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+The Django Shell .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 18-2: Short Entries . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 18-3: The Django API . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 18-4: Pizzeria . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Making Pages: The Learning Log Home Page .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Mapping a URL .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Writing a View  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Writing a Template  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 18-5: Meal Planner . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 18-6: Pizzeria Home Page . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Building Additional Pages  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Template Inheritance  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+The Topics Page .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Individual Topic Pages .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+WOW! eBook
+www.wowebook.org
+398
+398
+398
+399
+399
+400
+400
+401
+401
+402
+403
+403
+404
+406
+408
+409
+409
+410
+412
+412
+412
+412
+413
+414
+415
+416
+416
+416
+416
+418
+421
+Contents in Detail     xxiiiExercise 18-7: Template Documentation  . . . . . . . . . . . . . . . . . . . . . . . . . . . 424
+Exercise 18-8: Pizzeria Pages . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 424
+Summary .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 425
+19
+User Accounts	
+427
+Allowing Users to Enter Data  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Adding New Topics .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Adding New Entries .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Editing Entries .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 19-1: Blog  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Setting Up User Accounts .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+The users App .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+The Login Page  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Logging Out  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+The Registration Page .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 19-2: Blog Accounts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Allowing Users to Own Their Data  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Restricting Access with @login_required .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Connecting Data to Certain Users  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Restricting Topics Access to Appropriate Users  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Protecting a User’s Topics .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Protecting the edit_entry Page .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Associating New Topics with the Current User .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 19-3: Refactoring  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 19-4: Protecting new_entry . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 19-5: Protected Blog  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Summary .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+20
+Styling and Deploying an App	
+Styling Learning Log  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+The django-bootstrap3 App .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Using Bootstrap to Style Learning Log .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Modifying base.html .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Styling the Home Page Using a Jumbotron  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Styling the Login Page  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Styling the new_topic Page .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Styling the Topics Page .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Styling the Entries on the Topic Page  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 20-1: Other Forms . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 20-2: Stylish Blog  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Deploying Learning Log .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Making a Heroku Account  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Installing the Heroku Toolbelt .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Installing Required Packages .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Creating a Packages List with a requirements.txt File  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Specifying the Python Runtime .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Modifying settings.py for Heroku .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Making a Procfile to Start Processes .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Modifying wsgi.py for Heroku .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+xxiv     Contents in Detail
+WOW! eBook
+www.wowebook.org
+428
+428
+432
+435
+438
+439
+439
+440
+442
+443
+446
+446
+447
+448
+451
+451
+452
+453
+454
+454
+454
+454
+455
+456
+456
+457
+458
+461
+461
+463
+463
+464
+466
+466
+466
+466
+466
+466
+467
+468
+468
+469
+470Making a Directory for Static Files .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Using the gunicorn Server Locally .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Using Git to Track the Project’s Files .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Pushing to Heroku  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Setting Up the Database on Heroku .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Refining the Heroku Deployment  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Securing the Live Project .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Committing and Pushing Changes .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Creating Custom Error Pages .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Ongoing Development .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+The SECRET_KEY Setting .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Deleting a Project on Heroku .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Exercise 20-3: Live Blog . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 20-4: More 404s . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Exercise 20-5: Extended Learning Log  . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Summary .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+470
+470
+471
+473
+474
+475
+476
+477
+478
+480
+481
+481
+482
+482
+482
+482
+Afterword	483
+A
+Installing Python	
+485
+Python on Linux .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Finding the Installed Version  .  .  .  .  .  .  .
+Installing Python 3 on Linux .  .  .  .  .  .  .  .
+Python on OS X  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Finding the Installed Version  .  .  .  .  .  .  .
+Using Homebrew to Install Python 3 .  .
+Python on Windows  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Installing Python 3 on Windows .  .  .  .  .
+Finding the Python Interpreter  .  .  .  .  .  .
+Adding Python to Your Path Variable .
+Python Keywords and Built-in Functions  .  .  .  .  .  .
+Python Keywords .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Python Built-in Functions  .  .  .  .  .  .  .  .  .  .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+B
+Text Editors	
+485
+486
+486
+486
+486
+487
+488
+488
+488
+489
+489
+489
+490
+491
+Geany .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Installing Geany on Linux  .  .  .  .  .  .  .  .  .  .  .  .
+Installing Geany on Windows .  .  .  .  .  .  .  .  .
+Running Python Programs in Geany .  .  .  .  .
+Customizing Geany Settings .  .  .  .  .  .  .  .  .  .
+Sublime Text .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Installing Sublime Text on OS X .  .  .  .  .  .  .  .
+Installing Sublime Text on Linux  .  .  .  .  .  .  .  .
+Installing Sublime Text on Windows .  .  .  .  .
+Running Python Programs in Sublime Text .
+Configuring Sublime Text  .  .  .  .  .  .  .  .  .  .  .  .
+Customizing Sublime Text Settings .  .  .  .  .  .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+WOW! eBook
+www.wowebook.org
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+492
+492
+492
+493
+493
+494
+494
+494
+495
+495
+495
+496
+Contents in Detail     xxvIDLE . .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Installing IDLE on Linux .  .  .  .
+Installing IDLE on OS X .  .  .  .
+Installing IDLE on Windows .
+Customizing IDLE Settings .  .
+Emacs and vim .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+C
+Getting Help	
+499
+First Steps . . . . . . . . . . . . . . . . . . . . . . . .
+Try It Again .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Take a Break .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Refer to This Book’s Resources .  .  .  .
+Searching Online  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Stack Overflow  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+The Official Python Documentation .
+Official Library Documentation .  .  .  .
+r/learnpython  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Blog Posts .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+IRC (Internet Relay Chat)  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Make an IRC Account .  .  .  .  .  .  .  .  .  .
+Channels to Join  .  .  .  .  .  .  .  .  .  .  .  .  .
+IRC Culture .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+D
+Using Git for Version Control	
+Installing Git .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Installing Git on Linux .  .  .  .
+Installing Git on OS X .  .  .  .
+Installing Git on Windows .
+Configuring Git .  .  .  .  .  .  .  .
+Making a Project . . . . . . . . . . . . .
+Ignoring Files .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Initializing a Repository .  .  .  .  .  .  .  .  .
+Checking the Status .  .  .  .  .  .  .  .  .  .  .  .
+Adding Files to the Repository .  .  .  .  .
+Making a Commit .  .  .  .  .  .  .  .  .  .  .  .  .
+Checking the Log  .  .  .  .  .  .  .  .  .  .  .  .  .
+The Second Commit  .  .  .  .  .  .  .  .  .  .  .
+Reverting a Change . . . . . . . . . . .
+Checking Out Previous Commits .  .  .
+Deleting the Repository  .  .  .  .  .  .  .  .  .
+496
+496
+496
+497
+497
+497
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+499
+500
+500
+500
+501
+501
+501
+502
+502
+502
+502
+502
+503
+503
+505
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+.
+ .
+ .
+506
+506
+506
+506
+506
+507
+507
+507
+508
+508
+509
+509
+510
+511
+512
+513
+Index	515
+xxvi     Contents in Detail
+WOW! eBook
+www.wowebook.orgAc k n o w l e d g m e n t s
+This book would not have been possible without the wonderful and
+extremely professional staff at No Starch Press. Bill Pollock invited me to
+write an introductory book, and I deeply appreciate that original offer.
+Tyler Ortman helped shape my thinking in the early stages of drafting.
+Liz Chadwick’s and Leslie Shen’s initial feedback on each chapter was
+invaluable, and Anne Marie Walker helped to clarify many parts of the
+book. Riley Hoffman answered every question I had about the process of
+assembling a complete book and patiently turned my work into a beautiful
+finished product.
+I’d like to thank Kenneth Love, the technical reviewer for Python Crash
+Course. I met Kenneth at PyCon one year, and his enthusiasm for the lan-
+guage and the Python community has been a constant source of profes-
+sional inspiration ever since. Kenneth went beyond simple fact-checking
+and reviewed the book with the goal of helping beginning programmers
+develop a solid understanding of the Python language and programming
+in general. That said, any inaccuracies that remain are completely my own.
+I’d like to thank my father for introducing me to programming at a
+young age and for not being afraid that I’d break his equipment. I’d like
+to thank my wife, Erin, for supporting and encouraging me through the
+writing of this book, and I’d like to thank my son, Ever, whose curiosity
+inspires me every single day.
+WOW! eBook
+www.wowebook.orgWOW! eBook
+www.wowebook.orgIntroduction
+Every programmer has a story about
+how they learned to write their first pro-
+gram. I started learning as a child when
+my father was working for Digital Equipment
+Corporation, one of the pioneering companies of the
+modern computing era. I wrote my first program on a
+kit computer my dad had assembled in our basement. The computer con-
+sisted of nothing more than a bare motherboard connected to a keyboard
+without a case, and it had a bare cathode ray tube for a monitor. My initial
+program was a simple number guessing game, which looked something
+like this:
+I'm thinking of a number! Try to guess the number I'm thinking of: 25
+Too low! Guess again: 50
+Too high! Guess again: 42
+That's it! Would you like to play again? (yes/no) no
+Thanks for playing!
+WOW! eBook
+www.wowebook.orgI’ll always remember how satisfied I felt watching my family play a game
+that I created and that worked as I intended it to.
+That early experience had a lasting impact. There is real satisfaction
+in building something with a purpose, something that solves a problem.
+The software I write now meets a more significant need than my childhood
+efforts, but the sense of satisfaction I get from creating a program that works
+is still largely the same.
+Who Is This Book For?
+The goal of this book is to bring you up to speed with Python as quickly as
+possible so you can build programs that work—games, data visualizations,
+and web applications—while developing a foundation in programming that
+will serve you well for the rest of your life. Python Crash Course is written for
+people of any age who have never programmed in Python before or have
+never programmed at all. If you want to learn the basics of programming
+quickly so you can focus on interesting projects, and you like to test your
+understanding of new concepts by solving meaningful problems, this book
+is for you. Python Crash Course is also perfect for middle school and high
+school teachers who want to offer their students a project-based introduc-
+tion to programming.
+What Can You Expect to Learn?
+The purpose of this book is to make you a good programmer in general
+and a good Python programmer in particular. You’ll learn efficiently and
+adopt good habits as I provide you with a solid foundation in general pro-
+gramming concepts. After working your way through Python Crash Course,
+you should be ready to move on to more advanced Python techniques, and
+your next programming language will be even easier to grasp.
+In the first part of this book you’ll learn basic programming concepts
+you need to know to write Python programs. These concepts are the same
+as those you’d learn when starting out in almost any programming lan-
+guage. You’ll learn about different kinds of data and the ways you can store
+data in lists and dictionaries within your programs. You’ll learn to build
+collections of data and work through those collections in efficient ways.
+You’ll learn to use while and if loops to test for certain conditions so you
+can run specific sections of code while those conditions are true and run
+other sections when they’re not—a technique that greatly helps to automate
+processes.
+You’ll learn to accept input from users to make your programs inter­
+active and to keep your programs running as long as the user is active.
+You’ll explore how to write functions to make parts of your program
+reusable, so you only have to write blocks of code that perform certain
+xxx     Introduction
+WOW! eBook
+www.wowebook.orgactions once, which you can then use as many times as you like. You’ll then
+extend this concept to more complicated behavior with classes, making fairly
+simple programs respond to a variety of situations. You’ll learn to write pro-
+grams that handle common errors gracefully. After working through each
+of these basic concepts, you’ll write a few short programs that solve some
+well-defined problems. Finally, you’ll take your first step toward intermedi-
+ate programming by learning how to write tests for your code so you can
+develop your programs further without worrying about introducing bugs.
+All the information in Part I will prepare you for taking on larger, more
+complex projects.
+In Part II you’ll apply what you learned in Part I to three projects. You
+can do any or all of these projects in whichever order works best for you. In
+the first project (Chapters 12–14) you’ll create a Space Invaders–style shoot-
+ing game called Alien Invasion, which consists of levels of increasing diffi-
+culty. After you’ve completed this project, you should be well on your way to
+being able to develop your own 2D games.
+The second project (Chapters 15–17) introduces you to data visualiza-
+tion. Data scientists aim to make sense of the vast amount of information
+available to them through a variety of visualization techniques. You’ll
+work with data sets that you generate through code, data sets downloaded
+from online sources, and data sets your programs download automatically.
+After you’ve completed this project, you’ll be able to write programs that
+sift through large data sets and make visual representations of that stored
+information.
+In the third project (Chapters 18–20) you’ll build a small web applica-
+tion called Learning Log. This project allows you to keep a journal of ideas
+and concepts you’ve learned about a specific topic. You’ll be able to keep
+separate logs for different topics and allow others to create an account and
+start their own journals. You’ll also learn how to deploy your project so any-
+one can access it online from anywhere.
+Why Python?
+Every year I consider whether to continue using Python or whether to move
+on to a different language—perhaps one that’s newer to the programming
+world. But I continue to focus on Python for many reasons. Python is an
+incredibly efficient language: your programs will do more in fewer lines of
+code than many other languages would require. Python’s syntax will also
+help you write “clean” code. Your code will be easy to read, easy to debug,
+and easy to extend and build upon compared to other languages.
+People use Python for many purposes: to make games, build web appli-
+cations, solve business problems, and develop internal tools at all kinds of
+interesting companies. Python is also used heavily in scientific fields for
+academic research and applied work.
+WOW! eBook
+www.wowebook.org
+Introduction     xxxiOne of the most important reasons I continue to use Python is
+because of the Python community, which includes an incredibly diverse
+and welcoming group of people. Community is essential to program-
+mers because programming isn’t a solitary pursuit. Most of us, even the
+most experienced programmers, need to ask advice from others who have
+already solved similar problems. Having a well-connected and supportive
+community is critical in helping you solve problems, and the Python com-
+munity is fully supportive of people like you who are learning Python as
+your first programming language.
+Python is a great language to learn, so let’s get started!
+xxxii     Introduction
+WOW! eBook
+www.wowebook.orgPart I
+B a s ic s
+Part I of this book teaches you the basic concepts
+you’ll need to write Python programs. Many of
+these concepts are common to all programming
+languages, so they’ll be useful throughout your life
+as a programmer.
+In Chapter 1 you’ll install Python on your computer and run your first
+program, which prints the message Hello world! to the screen.
+In Chapter 2 you’ll learn to store information in variables and work
+with text and numerical values.
+Chapters 3 and 4 introduce lists. Lists can store as much information
+as you want in one variable, allowing you to work with that data efficiently.
+You’ll be able to work with hundreds, thousands, and even millions of values
+in just a few lines of code.
+In Chapter 5 you’ll use if statements to write code that responds one
+way if certain conditions are true, and responds in a different way if those
+conditions are not true.
+Chapter 6 shows you how to use Python’s dictionaries, which let you
+make connections between different pieces of information. Like lists, dic-
+tionaries can contain as much information as you need to store.
+In Chapter 7 you’ll learn how to accept input from users to make your
+programs interactive. You’ll also learn about while loops, which run blocks
+of code repeatedly as long as certain conditions remain true.
+In Chapter 8 you’ll write functions, which are named blocks of code
+that perform a specific task and can be run whenever you need them.
+WOW! eBook
+www.wowebook.orgChapter 9 introduces classes, which allow you to model real-world
+objects, such as dogs, cats, people, cars, rockets, and much more, so your
+code can represent anything real or abstract.
+Chapter 10 shows you how to work with files and handle errors so your
+programs won’t crash unexpectedly. You’ll store data before your program
+closes, and read the data back in when the program runs again. You’ll learn
+about Python’s exceptions, which allow you to anticipate errors, and make
+your programs handle those errors gracefully.
+In Chapter 11 you’ll learn to write tests for your code to check that
+your programs work the way you intend them to. As a result, you’ll be able
+to expand your programs without worrying about introducing new bugs.
+Testing your code is one of the first skills that will help you transition from
+beginner to intermediate programmer.
+2     Part I
+WOW! eBook
+www.wowebook.org1
+Ge t ting S ta r te d
+In this chapter you’ll run your first Python
+program, hello_world.py. First, you’ll need
+to check whether Python is installed on
+your computer; if it isn’t, you’ll install it. You’ll
+also install a text editor to work with your Python
+programs. Text editors recognize Python code and
+highlight sections as you write, making it easy to
+understand the structure of your code.
+Setting Up Your Programming Environment
+Python differs slightly on different operating systems, so you’ll need to keep
+a few considerations in mind. Here, we’ll look at the two major versions
+of Python currently in use and outline the steps to set up Python on your
+system.
+WOW! eBook
+www.wowebook.orgPython 2 and Python 3
+Today, two versions of Python are available: Python 2 and the newer
+Python 3. Every programming language evolves as new ideas and tech-
+nologies emerge, and the developers of Python have continually made the
+language more versatile and powerful. Most changes are incremental and
+hardly noticeable, but in some cases code written for Python 2 may not
+run properly on systems with Python 3 installed. Throughout this book I’ll
+point out areas of significant difference between Python 2 and Python 3, so
+whichever version you use, you’ll be able to follow the instructions.
+If both versions are installed on your system or if you need to install
+Python, use Python 3. If Python 2 is the only version on your system and
+you’d rather jump into writing code instead of installing Python, you can
+start with Python 2. But the sooner you upgrade to using Python 3 the
+better, so you’ll be working with the most recent version.
+Running Snippets of Python Code
+Python comes with an interpreter that runs in a terminal window, allow-
+ing you to try bits of Python without having to save and run an entire
+program.
+Throughout this book, you’ll see snippets that look like this:
+u >>> print("Hello Python interpreter!")
+Hello Python interpreter!
+The text in bold is what you’ll type in and then execute by pressing
+Most of the examples in the book are small, self-contained programs
+that you’ll run from your editor, because that’s how you’ll write most of your
+code. But sometimes basic concepts will be shown in a series of snippets run
+through a Python terminal session to demonstrate isolated concepts more
+efficiently. Any time you see the three angle brackets in a code listing u,
+you’re looking at the output of a terminal session. We’ll try coding in the
+interpreter for your system in a moment.
+enter .
+Hello World!
+A long-held belief in the programming world has been that printing a
+Hello world! message to the screen as your first program in a new language
+will bring you luck.
+In Python, you can write the Hello World program in one line:
+print("Hello world!")
+Such a simple program serves a very real purpose. If it runs correctly
+on your system, any Python program you write should work as well. We’ll
+look at writing this program on your particular system in just a moment.
+4     Chapter 1
+WOW! eBook
+www.wowebook.orgPython on Different Operating Systems
+Python is a cross-platform programming language, which means it runs on
+all the major operating systems. Any Python program you write should run
+on any modern computer that has Python installed. However, the methods
+for setting up Python on different operating systems vary slightly.
+In this section you’ll learn how to set up Python and run the Hello World
+program on your own system. You’ll first check whether Python is installed
+on your system and install it if it’s not. Then you’ll install a simple text edi-
+tor and save an empty Python file called hello_world.py. Finally, you’ll run
+the Hello World program and troubleshoot anything that didn’t work. I’ll
+walk you through this process for each operating system, so you’ll have a
+beginner-friendly Python programming environment.
+Python on Linux
+Linux systems are designed for programming, so Python is already installed
+on most Linux computers. The people who write and maintain Linux expect
+you to do your own programming at some point and encourage you to do
+so. For this reason there’s very little you have to install and very few settings
+you have to change to start programming.
+Checking Your Version of Python
+Open a terminal window by running the Terminal application on your
+system (in Ubuntu, you can press ctrl - alt -T). To find out whether Python
+is installed, enter python with a lowercase p. You should see output telling
+you which version of Python is installed and a >>> prompt where you can
+start entering Python commands, like this:
+$ python
+Python 2.7.6 (default, Mar 22 2014, 22:59:38)
+[GCC 4.8.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+This output tells you that Python 2.7.6 is currently the default version
+of Python installed on this computer. When you’ve seen this output, press
+ctrl -D or enter exit() to leave the Python prompt and return to a terminal
+prompt.
+To check for Python 3, you might have to specify that version; so even
+if the output displayed Python 2.7 as the default version, try the command
+python3 :
+$ python3
+Python 3.5.0 (default, Sep 17 2015, 13:05:18)
+[GCC 4.8.4] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+WOW! eBook
+www.wowebook.org
+Getting Started     5This output means you also have Python 3 installed, so you’ll be
+able to use either version. Whenever you see the python command in this
+book, enter python3 instead. Most Linux distributions have Python already
+installed, but if for some reason yours didn’t or if your system came with
+Python 2 and you want to install Python 3, refer to Appendix A.
+Installing a Text Editor
+Geany is a simple text editor: it’s easy to install, will let you run almost all
+your programs directly from the editor instead of through a terminal, uses
+syntax highlighting to color your code, and runs your code in a terminal
+window so you’ll get used to using terminals. Appendix B provides informa-
+tion on other text editors, but I recommend using Geany unless you have a
+good reason to use a different editor.
+You can install Geany in one line on most Linux systems:
+$ sudo apt-get install geany
+If this doesn’t work, see the instructions at http://geany.org/Download/
+ThirdPartyPackages/.
+Running the Hello World Program
+To start your first program, open Geany. Press the Super key (often called
+the Windows key) and search for Geany on your system. Make a shortcut
+by dragging the icon to your taskbar or desktop. Then make a folder some-
+where on your system for your projects and call it python_work. (It’s best to
+use lowercase letters and underscores for spaces in file and folder names
+because these are Python naming conventions.) Go back to Geany and save
+an empty Python file (File4Save As) called hello_world.py in your python_
+work folder. The extension .py tells Geany your file will contain a Python
+program. It also tells Geany how to run your program and highlight the
+text in a helpful way.
+After you’ve saved your file, enter the following line:
+print("Hello Python world!")
+If multiple versions of Python are installed on your system, you need to
+make sure Geany is configured to use the correct version. Go to Build4Set
+Build Commands. You should see the words Compile and Execute with a com-
+mand next to each. Geany assumes the correct command for each is python ,
+but if your system uses the python3 command, you’ll need to change this.
+If the command python3 worked in a terminal session, change the
+Compile and Execute commands so Geany will use the Python 3 inter-
+preter. Your Compile command should look like this:
+python3 -m py_compile "%f"
+6     Chapter 1
+WOW! eBook
+www.wowebook.orgYou need to type this command exactly as it’s shown. Make sure the
+spaces and capitalization match what is shown here.
+Your Execute command should look like this:
+python3 "%f"
+Again, make sure the spacing and capitalization match what is shown
+here. Figure 1-1 shows how these commands should look in Geany’s con-
+figuration menu.
+Figure 1-1: Here, Geany is configured to use Python 3 on Linux.
+Now run hello_world.py by selecting Build4Execute in the menu, by
+clicking the Execute icon (which shows a set of gears), or by pressing F5.
+A terminal window should pop up with the following output:
+Hello Python world!
+------------------
+(program exited with code: 0)
+Press return to continue
+If you don’t see this, check every character on the line you entered. Did
+you accidentally capitalize print ? Did you forget one or both of the quota-
+tion marks or parentheses? Programming languages expect very specific
+syntax, and if you don’t provide that, you’ll get errors. If you can’t get the
+program to run, see “Troubleshooting Installation Issues” on page 15.
+WOW! eBook
+www.wowebook.org
+Getting Started     7Running Python in a Terminal Session
+You can try running snippets of Python code by opening a terminal and
+typing python or python3 , as you did when checking your version. Do this
+again, but this time enter the following line in the terminal session:
+>>> print("Hello Python interpreter!")
+Hello Python interpreter!
+>>>
+You should see your message printed directly in the current terminal
+window. Remember that you can close the Python interpreter by pressing
+ctrl -D or by typing the command exit() .
+Python on OS X
+Python is already installed on most OS X systems. Once you know Python
+is installed, you’ll need to install a text editor and make sure it’s configured
+correctly.
+Checking Whether Python Is Installed
+Open a terminal window by going to Applications4Utilities4Terminal.
+You can also press command -spacebar, type terminal , and then press enter .
+To find out whether Python is installed, enter python with a lowercase p. You
+should see output telling you which version of Python is installed on your
+system and a >>> prompt where you can start entering Python commands,
+like this:
+$ python
+Python 2.7.5 (default, Mar 9 2014, 22:15:05)
+[GCC 4.2.1 Compatible Apple LLVM 5.0 (clang-500.0.68)] on darwin
+Type "help", "copyright", "credits", or "license" for more information.
+>>>
+This output tells you that Python 2.7.5 is currently the default version
+installed on this computer. When you’ve seen this output, press ctrl -D
+or enter exit() to leave the Python prompt and return to a terminal
+prompt.
+To check for Python 3, try the command python3 . You might get an error
+message, but if the output shows you have Python 3 installed, you’ll be able
+to use Python 3 without having to install it. If python3 works on your system,
+whenever you see the python command in this book, make sure you use python3
+instead. If for some reason your system didn’t come with Python or if you
+only have Python 2 and you want to install Python 3 now, see Appendix A.
+8     Chapter 1
+WOW! eBook
+www.wowebook.orgRunning Python in a Terminal Session
+You can try running snippets of Python code by opening a terminal and
+typing python or python3 , as you did when checking your version. Do this
+again, but this time enter the following line in the terminal session:
+>>> print("Hello Python interpreter!")
+Hello Python interpreter!
+>>>
+You should see your message printed directly in the current terminal
+window. Remember that you can close the Python interpreter by pressing
+ctrl -D or by typing the command exit() .
+Installing a Text Editor
+Sublime Text is a simple text editor: it’s easy to install on OS X, will let you
+run almost all of your programs directly from the editor instead of through
+a terminal, uses syntax highlighting to color your code, and runs your code
+in a terminal session embedded in the Sublime Text window to make it easy
+to see the output. Appendix B provides information on other text editors,
+but I recommend using Sublime Text unless you have a good reason to use
+a different editor.
+You can download an installer for Sublime Text from http://sublimetext
+.com/3. Click the download link and look for an installer for OS X. Sublime
+Text has a very liberal licensing policy: you can use the editor for free as
+long as you want, but the author requests that you purchase a license if you
+like it and want continual use. After the installer has been downloaded,
+open it and then drag the Sublime Text icon into your Applications folder.
+Configuring Sublime Text for Python 3
+If you use a command other than python to start a Python terminal session,
+you’ll need to configure Sublime Text so it knows where to find the correct
+version of Python on your system. Issue the following command to find out
+the full path to your Python interpreter:
+$ type -a python3
+python3 is /usr/local/bin/python3
+Now open Sublime Text, and go to Tools4Build System4New Build
+System, which will open a new configuration file for you. Delete what you
+see and enter the following:
+	Python3	
+{
+	.sublime-build	
+}
+"cmd": ["/usr/local/bin/python3", "-u", "$file"],
+WOW! eBook
+www.wowebook.org
+Getting Started     9This code tells Sublime Text to use your system’s python3 command
+when running the currently open file. Make sure you use the path you
+found when issuing the command type -a python3 in the previous step. Save
+the file as Python3.sublime-build in the default directory that Sublime Text
+opens when you choose Save.
+Running the Hello World Program
+To start your first program, launch Sublime Text by opening the
+Applications folder and double-clicking the Sublime Text icon. You can
+also press command -spacebar and enter sublime text in the search bar
+that pops up.
+Make a folder called python_work somewhere on your system for your
+projects. (It’s best to use lowercase letters and underscores for spaces in file
+and folder names, because these are Python naming conventions.) Save an
+empty Python file (File4Save As) called hello_world.py in your python_work
+folder. The extension .py tells Sublime Text that your file will contain a
+Python program and tells it how to run your program and highlight the
+text in a helpful way.
+After you’ve saved your file, enter the following line:
+print("Hello Python world!")
+If the command python works on your system, you can run your pro-
+gram by selecting Tools4Build in the menu or by pressing ctrl -B. If
+you configured Sublime Text to use a command other than python , select
+Tools4Build System and then select Python 3. This sets Python 3 as the
+default version of Python, and you’ll be able to select Tools4Build or just
+press command -B to run your programs from now on.
+A terminal screen should appear at the bottom of the Sublime Text win-
+dow, showing the following output:
+Hello Python world!
+[Finished in 0.1s]
+If you don’t see this, check every character on the line you entered. Did
+you accidentally capitalize print ? Did you forget one or both of the quota-
+tion marks or parentheses? Programming languages expect very specific
+syntax, and if you don’t provide that, you’ll get errors. If you can’t get the
+program to run, see “Troubleshooting Installation Issues” on page 15.
+Python on Windows
+Windows doesn’t always come with Python, so you’ll probably need to down-
+load and install it, and then download and install a text editor.
+10     Chapter 1
+WOW! eBook
+www.wowebook.orgInstalling Python
+First, check whether Python is installed on your system. Open a command
+window by entering command into the Start menu or by holding down the
+shift key while right-clicking on your desktop and selecting Open com-
+mand window here. In the terminal window, enter python in lowercase. If
+you get a Python prompt ( >>> ), Python is installed on your system. However,
+you’ll probably see an error message telling you that python is not a recog-
+nized command.
+In that case, download a Python installer for Windows. Go to http://
+python.org/downloads/. You should see two buttons, one for downloading
+Python 3 and one for downloading Python 2. Click the Python 3 button,
+which should automatically start downloading the correct installer for your
+system. After you’ve downloaded the file, run the installer. Make sure you
+check the option Add Python to PATH, which will make it easier to config-
+ure your system correctly. Figure 1-2 shows this option checked.
+Figure 1-2: Make sure you check the box labeled Add Python to PATH.
+Starting a Python Terminal Session
+Setting up your text editor will be straightforward if you first set up your
+system to run Python in a terminal session. Open a command window and
+enter python in lowercase. If you get a Python prompt ( >>> ), Windows has
+found the version of Python you just installed:
+C:\> python
+Python 3.5.0 (v3.5.0:374f501f4567, Sep 13 2015, 22:15:05) [MSC v.1900 32 bit
+(Intel)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+WOW! eBook
+www.wowebook.org
+Getting Started     11If this worked, you can move on to the next section, “Running Python
+in a Terminal Session.”
+However, you may see output that looks more like this:
+C:\> python
+'python' is not recognized as an internal or external command, operable
+program or batch file.
+In this case you need to tell Windows how to find the Python version
+you just installed. Your system’s python command is usually saved in your C
+drive, so open Windows Explorer and open your C drive. Look for a folder
+starting with the name Python, open that folder, and find the python file (in
+lowercase). For example, I have a Python35 folder with a file named python
+inside it, so the path to the python command on my system is C:\Python35\
+python. Otherwise, enter python into the search box in Windows Explorer to
+show you exactly where the python command is stored on your system.
+When you think you know the path, test it by entering that path into a
+terminal window. Open a command window and enter the full path you just
+found:
+C:\> C:\Python35\python
+Python 3.5.0 (v3.5.0:374f501f4567, Sep 13 2015, 22:15:05) [MSC v.1900 32 bit
+(Intel)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+If this worked, you know how to access Python on your system.
+Running Python in a Terminal Session
+Enter the following line in your Python session, and make sure you see the
+output Hello Python world!
+>>> print("Hello Python world!")
+Hello Python world!
+>>>
+Any time you want to run a snippet of Python code, open a command
+window and start a Python terminal session. To close the terminal session,
+press ctrl -Z and then press enter , or enter the command exit() .
+Installing a Text Editor
+Geany is a simple text editor: it’s easy to install, will let you run almost all of
+your programs directly from the editor instead of through a terminal, uses
+syntax highlighting to color your code, and runs your code in a terminal
+window so you’ll get used to using terminals. Appendix B provides informa-
+tion on other text editors, but I recommend using Geany unless you have a
+good reason to use a different editor.
+12     Chapter 1
+WOW! eBook
+www.wowebook.orgYou can download a Windows installer for Geany from http://geany.org/.
+Click Releases under the Download menu, and look for the geany-1.25_
+setup.exe installer or something similar. Run the installer and accept all the
+defaults.
+To start your first program, open Geany: press the Windows key and
+search for Geany on your system. You should make a shortcut by dragging
+the icon to your taskbar or desktop. Make a folder called python_work some-
+where on your system for your projects. (It’s best to use lowercase letters and
+underscores for spaces in file and folder names, because these are Python
+naming conventions.) Go back to Geany and save an empty Python file
+(File4Save As) called hello_world.py in your python_work folder. The exten-
+sion .py tells Geany that your file will contain a Python program. It also tells
+Geany how to run your program and to highlight the text in a helpful way.
+After you’ve saved your file, type the following line:
+print("Hello Python world!")
+If the command python worked on your system, you won’t have to config-
+ure Geany; skip the next section and move on to “Running the Hello World
+Program” on page 14. If you needed to enter a path like C:\Python35\python
+to start a Python interpreter, follow the directions in the next section to
+configure Geany for your system.
+Configuring Geany
+To configure Geany, go to Build4Set Build Commands. You should see
+the words Compile and Execute with a command next to each. The Compile
+and Execute commands start with python in lowercase, but Geany doesn’t
+know where your system stored the python command. You need to add the
+path you used in the terminal session.
+In the Compile and Execute commands, add the drive your python
+command is on and the folder where the python command is stored. Your
+Compile command should look something like this:
+C:\Python35\python -m py_compile "%f"
+Your path might be a little different, but make sure the spaces and
+capitalization match what is shown here.
+Your Execute command should look something like this:
+C:\Python35\python "%f"
+Again, make sure the spacing and capitalization in your Execute com-
+mand matches what is shown here. Figure 1-3 shows how these commands
+should look in Geany’s configuration menu.
